@@ -3,6 +3,7 @@
 	<persistence-unit name="PetList" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>model.ListDogs</class>
+		<class>model.ListOwners</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pets?autoReconnect=true&amp;useSSL=false"/>

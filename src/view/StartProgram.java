@@ -20,8 +20,8 @@ public class StartProgram {
 			String name = in.nextLine();
 			System.out.print("Enter an owner: ");
 			String owner = in.nextLine();
-			ListDogs toAdd = new ListDogs(type,name,owner);
-			ldh.insertDog(toAdd);
+			//ListDogs toAdd = new ListDogs(type,name,owner);
+			//ldh.insertDog(toAdd);
 		}
 
 		private static void deleteADog() {
@@ -32,8 +32,8 @@ public class StartProgram {
 			String name = in.nextLine();
 			System.out.print("Enter the owner to delete: ");
 			String owner = in.nextLine();
-			ListDogs toDelete = new ListDogs(type,name,owner);
-			ldh.deleteDog(toDelete);
+			//ListDogs toDelete = new ListDogs(type,name,owner);
+			//ldh.deleteDog(toDelete);
 
 		}
 
@@ -89,7 +89,7 @@ public class StartProgram {
 				} else if (update == 3) {
 					System.out.print("New owner: ");
 					String newOwner = in.nextLine();
-					toEdit.setOwner(newOwner);
+					//toEdit.setOwner(newOwner);
 				}
 				
 

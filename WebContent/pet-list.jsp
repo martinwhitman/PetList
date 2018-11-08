@@ -15,7 +15,7 @@
 	<td><input type="radio" name="ID" value="${currentdog.ID}"></td>
 	<td>${currentdog.type}</td>
 	<td>${currentdog.name}</td>
-	<td>${currentdog.owner}</td>
+	<td>${currentdog.owner.getName()}</td>
 	</tr>
 </c:forEach>
 </table>

@@ -1,10 +1,16 @@
 package model;
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,9 +24,19 @@ public class ListDogs {
 	private String type;
 	@Column(name="name")
 	private String name;
-	@Column(name="owner")
-	private String owner;
+	@ManyToOne(cascade=CascadeType.ALL, fetch =FetchType.LAZY)
+	@JoinColumn(name="ownerID")
+	private ListOwners owner;
 	
+	
+	
+	public void setOwner(ListOwners listOwner) {
+		
+		this.owner=listOwner;
+		if(!listOwner.getListDogs().contains(this)) {
+			listOwner.getListDogs().add(this);
+		}
+	}
 	
 	public ListDogs(){
 		
@@ -43,16 +59,19 @@ public class ListDogs {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getOwner() {
+	
+	public ListOwners getOwner() {
 		return owner;
 	}
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-	public ListDogs(String t, String n, String o) {
+	//public void setOwner(ListOwners owner) {
+		//this.owner = owner;
+	//}
+	public ListDogs(String t, String n, int o) {
 		this.type =t;
 		this.name = n;
-		this.owner = o;
+		
+		
+		
 	}
 	public String returnDogDetails() {
 		return owner+"'s "+type+" is named: "+name;

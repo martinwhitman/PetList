@@ -32,13 +32,13 @@ public class addDogServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
 		String name = request.getParameter("name");
-		String owner = request.getParameter("owner");
+		int id = Integer.parseInt(request.getParameter("ownerID"));
 		
-		ListDogs ld = new ListDogs(type,name,owner);
+		ListDogs ld = new ListDogs(type,name,id);
 		ListDogsHelper dao = new ListDogsHelper();
 		dao.insertDog(ld);
 		
-		getServletContext().getRequestDispatcher("/addDog.html").forward(request, response);
+		getServletContext().getRequestDispatcher("/addDog.jsp").forward(request, response);
 		
 	}
 

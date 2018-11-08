@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ListDogs;
+import model.ListOwners;
 
 /**
- * Servlet implementation class editItemServlet
+ * Servlet implementation class addOwnerServlet
  */
-@WebServlet("/editItemServlet")
-public class editItemServlet extends HttpServlet {
+@WebServlet("/addOwnerServlet")
+public class addOwnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editItemServlet() {
+    public addOwnerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +29,19 @@ public class editItemServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ListDogsHelper dao = new ListDogsHelper();
-		
-		String type = request.getParameter("type");
 		String name = request.getParameter("name");
-		String owner = request.getParameter("owner");
-		Integer tempId = Integer.parseInt(request.getParameter("ID"));
+		String address = request.getParameter("address");
+		String state = request.getParameter("state");
 		
-		ListDogs dogToUpdate = dao.searchForItemById(tempId);
-		dogToUpdate.setType(type);
-		dogToUpdate.setName(name);
-		dogToUpdate.setOwner(owner);
+		ListOwners lo = new ListOwners(name,address,state);
+		ListOwnersHelper dao = new ListOwnersHelper();
+		dao.insertOwner(lo);
 		
-		dao.updateDog(dogToUpdate);
+		getServletContext().getRequestDispatcher("/addOwner.html").forward(request, response);
 		
-		getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
 	}
 
 }
