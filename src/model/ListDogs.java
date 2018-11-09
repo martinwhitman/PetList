@@ -63,10 +63,8 @@ public class ListDogs {
 	public ListOwners getOwner() {
 		return owner;
 	}
-	//public void setOwner(ListOwners owner) {
-		//this.owner = owner;
-	//}
-	public ListDogs(String t, String n, int o) {
+	
+	public ListDogs(String t, String n) {
 		this.type =t;
 		this.name = n;
 		

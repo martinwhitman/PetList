@@ -46,32 +46,32 @@ public class editPetListServlet extends HttpServlet {
 		}
 		else if(act.equals("Delete Selected Dog")) {
 			int tempID=0;
-			try {
+			//try {
 				tempID = Integer.parseInt(request.getParameter("ID"));
 				ListDogs dogToDelete = dao.searchForItemById(tempID);
 				dao.deleteDog(dogToDelete);
 				
 				getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
-			}
-			catch(Exception e){
-				getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
-			}
+			//}
+//			catch(Exception e){
+//				getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
+//			}
 			
 		}
 		else if(act.equals("Edit Selected Dog")) {
-			int tempID=0;
-			try {
-				tempID = Integer.parseInt(request.getParameter("ID"));
+			
+			//try {
+				Integer tempID = Integer.parseInt(request.getParameter("ID"));
 				ListDogs dogToEdit = dao.searchForItemById(tempID);
 				request.setAttribute("dogToEdit", dogToEdit);
 				getServletContext().getRequestDispatcher("/edit-dog.jsp").forward(request, response);
-			}
-			catch(Exception e) {
-				getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
-			}
+//			}
+//			catch(Exception e) {
+//				getServletContext().getRequestDispatcher("/viewAllDogsServlet").forward(request, response);
+//			}
 		}
 		else if(act.equals("Add New Dog")) {
-			getServletContext().getRequestDispatcher("/addDog.html").forward(request, response);
+			getServletContext().getRequestDispatcher("/addDog.jsp").forward(request, response);
 		}
 	}
 

@@ -8,10 +8,10 @@
 <title>EDIT DOG</title>
 </head>
 <body>
-<form action = "editItemServlet" method="post">
+<form action = "editDogServlet" method="post">
 Type: <input type="text" name = "type" value="${dogToEdit.type}">
 Name: <input type="text" name = "name" value="${dogToEdit.name}">
-Owner: <input type="text" name = "owner" value="${dogToEdit.owner}">
+Owner ID: <input type="text" name = "ownerID" value="${dogToEdit.owner.ownerID}">
 <input type="hidden" name = "ID" value="${dogToEdit.ID}">
 <input type="submit" value="Save Edited Dog">
 </form>

@@ -1,12 +1,17 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.persistence.jpa.PersistenceProvider;
 
 import model.ListOwners;
 
@@ -16,7 +21,7 @@ import model.ListOwners;
 @WebServlet("/editOwnerListServlet")
 public class editOwnerListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	static EntityManagerFactory emfactory = new PersistenceProvider().createEntityManagerFactory("PetList",null);   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,29 +52,32 @@ public class editOwnerListServlet extends HttpServlet {
 		}
 		else if(act.equals("Delete Selected Owner")) {
 			int tempID=0;
-			try {
-				tempID = Integer.parseInt(request.getParameter("ID"));
-				ListOwners ownerToDelete = dao.searchForItemById(tempID);
-				dao.deleteOwner(ownerToDelete);
+			//try {
+				EntityManager em = emfactory.createEntityManager();
+				em.getTransaction().begin();
+				TypedQuery<ListOwners> typedQuery = em.createQuery("select lo from ListOwners lo where lo.ownerID = :ownerID",ListOwners.class);
+				typedQuery.setParameter("ownerID", Integer.parseInt(request.getParameter("ownerID")));
+				ListOwners result = typedQuery.getSingleResult();
+				dao.deleteOwner(result);
 				
 				getServletContext().getRequestDispatcher("/viewAllOwnersServlet").forward(request, response);
-			}
-			catch(Exception e){
-				getServletContext().getRequestDispatcher("/viewAllOwnersServlet").forward(request, response);
-			}
+			//}
+//			catch(Exception e){
+//				getServletContext().getRequestDispatcher("/viewAllOwnersServlet").forward(request, response);
+//			}
 			
 		}
 		else if(act.equals("Edit Selected Owner")) {
 			int tempID=0;
-			try {
-				tempID = Integer.parseInt(request.getParameter("ID"));
+			//try {
+				tempID = Integer.parseInt(request.getParameter("ownerID"));
 				ListOwners ownerToEdit = dao.searchForItemById(tempID);
 				request.setAttribute("ownerToEdit", ownerToEdit);
-				getServletContext().getRequestDispatcher("/edit-owner.jsp").forward(request, response);
-			}
-			catch(Exception e) {
-				getServletContext().getRequestDispatcher("/viewAllOwnersServlet").forward(request, response);
-			}
+				getServletContext().getRequestDispatcher("/editOwnerListServlet").forward(request, response);
+			//}
+//			catch(Exception e) {
+//				getServletContext().getRequestDispatcher("/viewAllOwnersServlet").forward(request, response);
+//			}
 		}
 		else if(act.equals("Add New Owner")) {
 			getServletContext().getRequestDispatcher("/addOwner.html").forward(request, response);

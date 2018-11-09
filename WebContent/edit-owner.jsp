@@ -8,11 +8,11 @@
 <title>EDIT OWNER</title>
 </head>
 <body>
-<form action = "editItemServlet" method="post">
-Type: <input type="text" name = "name" value="${ownerToEdit.name}">
-Name: <input type="text" name = "address" value="${ownerToEdit.address}">
-Owner: <input type="text" name = "state" value="${ownerToEdit.state}">
-<input type="hidden" name = "ID" value="${ownerToEdit.ID}">
+<form action = "editOwnerServlet" method="post">
+Name: <input type="text" name = "name" value="${ownerToEdit.name}">
+Address: <input type="text" name = "address" value="${ownerToEdit.address}">
+State: <input type="text" name = "state" value="${ownerToEdit.state}">
+<input type="hidden" name = "ownerID" value="${ownerToEdit.ownerID}">
 <input type="submit" value="Save Edited Owner">
 </form>
 </body>

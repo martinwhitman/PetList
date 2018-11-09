@@ -42,7 +42,7 @@ public class editOwnerServlet extends HttpServlet {
 		String address=request.getParameter("address");
 		String state=request.getParameter("state");
 		
-		Integer tempID = Integer.parseInt(request.getParameter("ownerID"));
+		Integer tempID = Integer.parseInt(request.getParameter("ID"));
 		
 		ListOwners ownerToUpdate = dao.searchForItemById(tempID);
 		

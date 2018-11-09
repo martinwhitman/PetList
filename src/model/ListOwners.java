@@ -27,7 +27,7 @@ public class ListOwners{
 	private String address;
 	@Column(name="state")
 	private String state;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "owner")
 	private List<ListDogs> listDogs;
 	
 	public List<ListDogs> getListDogs() {
